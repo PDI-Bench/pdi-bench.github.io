@@ -291,7 +291,9 @@ body {
 }
 
 .pipeline-caption {
-  font-size: 0.92rem !important;
+  font-size: 0.82rem !important;
+  color: var(--text-secondary);
+  font-weight: 500;
   line-height: 1.6;
   max-width: 980px;
   margin: 0.75rem auto 0;
