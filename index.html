@@ -262,13 +262,12 @@
         <source src="static/videos/bus_hero.mp4" type="video/mp4">
       </video>
       <!-- TODO: Replace with your video description -->
-      <h2 class="subtitle has-text-centered">
-        <strong>Visualization of the PDI-Bench Target-Uplift-Anchor pipeline.</strong>
-        The video demonstrates the transformation of monocular observations into 3D world-space trajectories:
-        <strong>Step 1: Semantic Targeting (SAM 2)</strong> isolates the auditing subject to establish precise 2D spatial boundaries.
-        <strong>Step 2: 3D Geometric Uplifting (MegaSaM)</strong> reconstructs the physical environment and projects pixels into a unified 3D world-space pointmap.
-        <strong>Step 3: 3D Structural Anchoring (CoTracker3)</strong> tracks dense pixel-space anchors and lifts them into structurally meaningful 3D trajectories for subsequent rigidity auditing.
-      </h2>
+      <div class="subtitle has-text-centered pipeline-caption">
+        <strong>Visualization of the PDI-Bench Target-Uplift-Anchor pipeline.</strong><br>
+        <span><strong>Step 1: Semantic Targeting (SAM 2)</strong> isolates the auditing subject to establish precise 2D spatial boundaries.</span><br>
+        <span><strong>Step 2: 3D Geometric Uplifting (MegaSaM)</strong> reconstructs the physical environment and projects pixels into a unified 3D world-space pointmap.</span><br>
+        <span><strong>Step 3: 3D Structural Anchoring (CoTracker3)</strong> tracks dense pixel-space anchors and lifts them into structurally meaningful 3D trajectories for subsequent rigidity auditing.</span>
+      </div>
     </div>
   </div>
 </section>
@@ -277,7 +276,7 @@
 <section class="hero is-small">
   <div class="hero-body">
     <div class="container">
-      <div id="results-carousel-pipeline" class="carousel results-carousel">
+      <div id="results-carousel-pipeline" class="results-carousel">
        <div class="item">
         <!-- TODO: Replace with your research result images -->
         <img src="static/images/pipeline.png" alt="First research result visualization" loading="lazy"/>
@@ -290,6 +289,24 @@
   </div>
   </div>
   </section>
+
+<!-- Benchmark overview image -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div class="results-carousel">
+        <div class="item">
+          <img src="static/images/teaser.png" alt="Overview of PDI-Bench evaluation across GT and video generation models" loading="lazy"/>
+          <h2 class="subtitle has-text-centered">
+            <strong>Overview of the PDI-Bench Evaluation.</strong><br>
+            <strong>(Top)</strong> Qualitative samples from our dataset, featuring real-world Ground Truth (GT) videos and generated sequences from state-of-the-art models.<br>
+            <strong>(Bottom)</strong> The corresponding <strong>PDI-Scores</strong> for GT and each model. Lower scores indicate better adherence to 3D physical laws (scale alignment, motion consistency, and structural rigidity).
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- Paper abstract -->
 <section class="section hero is-light">
@@ -315,7 +332,7 @@
 <section class="hero is-small">
   <div class="hero-body">
     <div class="container">
-      <div id="results-carousel-metrics" class="carousel results-carousel">
+      <div id="results-carousel-metrics" class="results-carousel">
        <div class="item">
         <!-- TODO: Replace with your research result images -->
         <img src="static/images/metric.png" alt="First research result visualization" loading="lazy"/>
@@ -333,23 +350,6 @@
 </section>
 <!-- End image carousel -->
 
-
-
-
-<!-- Paper poster -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title">Poster</h2>
-
-      <!-- TODO: Replace with your poster PDF -->
-      <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">
-          </iframe>
-        
-      </div>
-    </div>
-  </section>
-<!--End paper poster -->
 
 
 

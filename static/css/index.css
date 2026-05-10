@@ -290,6 +290,18 @@ body {
   font-weight: 500;
 }
 
+.pipeline-caption {
+  font-size: 0.92rem !important;
+  line-height: 1.6;
+  max-width: 980px;
+  margin: 0.75rem auto 0;
+}
+
+.pipeline-caption span {
+  display: block;
+  margin-top: 0.3rem;
+}
+
 /* Pagination and Misc Improvements */
 .slider-pagination .slider-page {
   background: var(--primary-color);
