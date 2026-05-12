@@ -382,6 +382,11 @@ body {
   vertical-align: middle;
 }
 
+.compact-leaderboard th,
+.compact-leaderboard td {
+  white-space: nowrap;
+}
+
 .baseline-row {
   background: #eff6ff;
 }
@@ -391,6 +396,20 @@ body {
   align-items: center;
   gap: 0.5rem;
   min-width: 160px;
+}
+
+.model-detail-trigger {
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+}
+
+.model-detail-trigger:hover {
+  color: var(--primary-color);
 }
 
 .model-cell img {
@@ -480,7 +499,7 @@ body {
   font-size: 0.86rem;
 }
 
-.compare-modal {
+.radar-modal {
   position: fixed;
   inset: 0;
   background: rgba(15, 23, 42, 0.55);
@@ -488,60 +507,79 @@ body {
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  z-index: 50;
+  z-index: 60;
 }
 
-.compare-modal.is-open {
+.radar-modal.is-open {
   display: flex;
 }
 
-.compare-modal-card {
-  width: min(960px, 100%);
+.radar-modal-card {
+  width: min(780px, 100%);
   background: white;
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-xl);
   padding: 1rem;
 }
 
-.compare-modal-header {
+.radar-modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.compare-modal-header h3 {
+.radar-modal-header h3 {
   font-size: 1.15rem;
   font-weight: 700;
 }
 
-.compare-modal-header button {
+.radar-modal-header button {
   border: none;
   background: transparent;
   font-size: 1.4rem;
   cursor: pointer;
 }
 
-.compare-delta {
-  margin: 0.6rem 0;
+.radar-subtitle {
+  margin: 0.35rem 0 0.8rem;
   color: var(--text-secondary);
-  font-weight: 500;
 }
 
-.compare-grid {
+.radar-layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
+  grid-template-columns: minmax(260px, 360px) 1fr;
+  gap: 1rem;
+  align-items: center;
 }
 
-.compare-item h4 {
-  font-size: 0.95rem;
-  margin-bottom: 0.35rem;
+.radar-metrics {
+  display: grid;
+  gap: 0.6rem;
 }
 
-.compare-item video {
-  width: 100%;
-  border-radius: 10px;
+.metric-chip {
   border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 0.55rem 0.65rem;
+  background: var(--background-secondary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.metric-chip strong {
+  font-size: 1rem;
+}
+
+.metric-chip-accent {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+}
+
+.radar-note {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin-top: 0.35rem;
 }
 
 /* Pagination and Misc Improvements */

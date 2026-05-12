@@ -153,7 +153,7 @@ function setupSamplePreviews() {
 
 function setupLeaderboardSorting() {
     const table = document.querySelector('.leaderboard-table');
-    const tbody = document.getElementById('leaderboardBody');
+    const tbody = document.getElementById('leaderboardBodyCompact');
     if (!table || !tbody) return;
 
     const sortHeaders = table.querySelectorAll('th.sortable');
@@ -183,6 +183,127 @@ function setupLeaderboardSorting() {
                 tbody.appendChild(row);
             });
         });
+    });
+}
+
+function drawRadarChart(canvas, values) {
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const width = canvas.width;
+    const height = canvas.height;
+    const cx = width / 2;
+    const cy = height / 2;
+    const radius = Math.min(width, height) * 0.33;
+    const labels = ['Scale', 'Traj', 'Rigid'];
+    const angles = [-Math.PI / 2, (Math.PI * 1) / 6, (Math.PI * 5) / 6];
+
+    ctx.clearRect(0, 0, width, height);
+
+    // grid
+    ctx.strokeStyle = '#cbd5e1';
+    ctx.lineWidth = 1;
+    for (let level = 1; level <= 4; level += 1) {
+        const r = (radius * level) / 4;
+        ctx.beginPath();
+        angles.forEach((angle, idx) => {
+            const x = cx + Math.cos(angle) * r;
+            const y = cy + Math.sin(angle) * r;
+            if (idx === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        });
+        ctx.closePath();
+        ctx.stroke();
+    }
+
+    // axes
+    ctx.strokeStyle = '#94a3b8';
+    angles.forEach((angle) => {
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + Math.cos(angle) * radius, cy + Math.sin(angle) * radius);
+        ctx.stroke();
+    });
+
+    // data polygon
+    ctx.fillStyle = 'rgba(37, 99, 235, 0.25)';
+    ctx.strokeStyle = '#2563eb';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    values.forEach((val, idx) => {
+        const r = radius * Math.max(0, Math.min(1, val));
+        const x = cx + Math.cos(angles[idx]) * r;
+        const y = cy + Math.sin(angles[idx]) * r;
+        if (idx === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+    });
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    // points + labels
+    ctx.fillStyle = '#1e293b';
+    ctx.font = '13px Inter, sans-serif';
+    labels.forEach((label, idx) => {
+        const lx = cx + Math.cos(angles[idx]) * (radius + 18);
+        const ly = cy + Math.sin(angles[idx]) * (radius + 18);
+        ctx.fillText(label, lx - 16, ly + 5);
+    });
+}
+
+function setupModelRadar() {
+    const modal = document.getElementById('radarModal');
+    const closeBtn = document.getElementById('closeRadarModal');
+    const triggers = document.querySelectorAll('.model-detail-trigger, .model-open-btn');
+    if (!modal || !closeBtn || triggers.length === 0) return;
+
+    const title = document.getElementById('radarTitle');
+    const subtitle = document.getElementById('radarSubtitle');
+    const metricScale = document.getElementById('metricScale');
+    const metricTraj = document.getElementById('metricTraj');
+    const metricRigid = document.getElementById('metricRigid');
+    const metricPdi = document.getElementById('metricPdi');
+    const canvas = document.getElementById('radarCanvas');
+    const rows = Array.from(document.querySelectorAll('#leaderboardBodyCompact tr'));
+
+    const maxScale = Math.max(...rows.map((row) => parseFloat(row.dataset.scale || '0')));
+    const maxTraj = Math.max(...rows.map((row) => parseFloat(row.dataset.traj || '0')));
+    const maxRigid = Math.max(...rows.map((row) => parseFloat(row.dataset.rigid || '0')));
+
+    triggers.forEach((trigger) => {
+        trigger.addEventListener('click', () => {
+            const model = trigger.dataset.model;
+            const org = trigger.dataset.org;
+            const pdi = parseFloat(trigger.dataset.pdi);
+            const scale = parseFloat(trigger.dataset.scale);
+            const traj = parseFloat(trigger.dataset.traj);
+            const rigid = parseFloat(trigger.dataset.rigid);
+
+            title.textContent = `${model} Radar Profile`;
+            subtitle.textContent = `${org} | Lower raw residuals are better.`;
+            metricScale.textContent = scale.toFixed(4);
+            metricTraj.textContent = traj.toFixed(4);
+            metricRigid.textContent = rigid.toFixed(4);
+            metricPdi.textContent = pdi.toFixed(4);
+
+            const normalized = [
+                1 - scale / maxScale,
+                1 - traj / maxTraj,
+                1 - rigid / maxRigid
+            ];
+            drawRadarChart(canvas, normalized);
+
+            modal.classList.add('is-open');
+            modal.setAttribute('aria-hidden', 'false');
+        });
+    });
+
+    closeBtn.addEventListener('click', () => {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+    });
+
+    modal.addEventListener('click', (event) => {
+        if (event.target === modal) closeBtn.click();
     });
 }
 
@@ -268,6 +389,6 @@ $(document).ready(function() {
     setupLeaderboardTabs();
     setupSamplePreviews();
     setupLeaderboardSorting();
-    setupLeaderboardCompare();
+    setupModelRadar();
 
 })

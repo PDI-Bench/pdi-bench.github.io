@@ -323,221 +323,105 @@
 
     <div class="leaderboard-panel is-active" id="mainLeaderboard">
       <div class="table-container">
-        <table class="table is-fullwidth leaderboard-table">
+        <table class="table is-fullwidth leaderboard-table compact-leaderboard">
           <thead>
             <tr>
               <th>Rank</th>
               <th>Model</th>
               <th>Organization</th>
               <th class="sortable" data-sort-key="pdi">PDI Score ↓</th>
-              <th>CI95</th>
-              <th class="sortable" data-sort-key="scale">Scale εs ↓</th>
-              <th class="sortable" data-sort-key="traj">Traj εt ↓</th>
-              <th class="sortable" data-sort-key="rigid">Rigid εr ↓</th>
-              <th>Std</th>
-              <th>Outlier</th>
-              <th class="sortable" data-sort-key="mathpass">MathPass ↑</th>
-              <th>Samples</th>
-              <th>Compare</th>
+              <th>Details</th>
             </tr>
           </thead>
-          <tbody id="leaderboardBody">
+          <tbody id="leaderboardBodyCompact">
             <tr class="baseline-row" data-rank="1" data-pdi="0.1206" data-scale="0.0660" data-traj="0.1764" data-rigid="0.1182" data-mathpass="86.7">
               <td>1</td>
               <td>
                 <div class="model-cell">
-                  <img src="static/images/gt.png" alt="GT logo">
-                  <span>Ground Truth (GT)</span>
+                  <img src="static/images/GT.png" alt="GT logo">
+                  <button type="button" class="model-detail-trigger" data-model="Ground Truth (GT)" data-org="Real World" data-pdi="0.1206" data-scale="0.0660" data-traj="0.1764" data-rigid="0.1182">Ground Truth (GT)</button>
                 </div>
               </td>
               <td>Real World</td>
               <td class="pdi-score pdi-anchor"><strong>0.1206</strong></td>
-              <td>[0.1018, 0.1386]</td>
-              <td>0.0660</td>
-              <td>0.1764</td>
-              <td>0.1182</td>
-              <td>0.0378</td>
-              <td>0.0%</td>
-              <td>86.7%</td>
-              <td>
-                <div class="sample-preview" data-video="static/videos/carousel1.mp4">
-                  <img src="static/images/teaser.png" alt="GT sample preview">
-                  <video muted loop playsinline preload="metadata">
-                    <source src="static/videos/carousel1.mp4" type="video/mp4">
-                  </video>
-                </div>
-              </td>
-              <td><input type="checkbox" class="compare-check" data-model="Ground Truth (GT)" data-pdi="0.1206" data-scale="0.0660" data-traj="0.1764" data-rigid="0.1182" data-mathpass="86.7" data-video="static/videos/carousel1.mp4"></td>
+              <td><button type="button" class="button is-small is-dark model-open-btn" data-model="Ground Truth (GT)" data-org="Real World" data-pdi="0.1206" data-scale="0.0660" data-traj="0.1764" data-rigid="0.1182">View Radar</button></td>
             </tr>
             <tr data-rank="2" data-pdi="0.2422" data-scale="0.2295" data-traj="0.2064" data-rigid="0.3392" data-mathpass="89.3">
               <td>2</td>
               <td>
                 <div class="model-cell">
                   <img src="static/images/seedance.png" alt="Seedance logo">
-                  <span>Seedance 2.0</span>
+                  <button type="button" class="model-detail-trigger" data-model="Seedance 2.0" data-org="ByteDance" data-pdi="0.2422" data-scale="0.2295" data-traj="0.2064" data-rigid="0.3392">Seedance 2.0</button>
                 </div>
               </td>
               <td>ByteDance</td>
               <td class="pdi-score pdi-good"><strong>0.2422</strong></td>
-              <td>[0.1954, 0.2920]</td>
-              <td><strong>0.2295</strong></td>
-              <td>0.2064</td>
-              <td>0.3392</td>
-              <td>0.1315</td>
-              <td><strong>0.0%</strong></td>
-              <td><strong>89.3%</strong></td>
-              <td>
-                <div class="sample-preview" data-video="static/videos/carousel2.mp4">
-                  <img src="static/images/teaser.png" alt="Seedance sample preview">
-                  <video muted loop playsinline preload="metadata">
-                    <source src="static/videos/carousel2.mp4" type="video/mp4">
-                  </video>
-                </div>
-              </td>
-              <td><input type="checkbox" class="compare-check" data-model="Seedance 2.0" data-pdi="0.2422" data-scale="0.2295" data-traj="0.2064" data-rigid="0.3392" data-mathpass="89.3" data-video="static/videos/carousel2.mp4"></td>
+              <td><button type="button" class="button is-small is-dark model-open-btn" data-model="Seedance 2.0" data-org="ByteDance" data-pdi="0.2422" data-scale="0.2295" data-traj="0.2064" data-rigid="0.3392">View Radar</button></td>
             </tr>
             <tr data-rank="3" data-pdi="0.2480" data-scale="0.3135" data-traj="0.2033" data-rigid="0.2065" data-mathpass="85.7">
               <td>3</td>
               <td>
                 <div class="model-cell">
-                  <img src="static/images/chatglm.png" alt="CogVideoX logo">
-                  <span>CogVideoX-3</span>
+                  <img src="static/images/chatGLM.png" alt="CogVideoX logo">
+                  <button type="button" class="model-detail-trigger" data-model="CogVideoX-3" data-org="Zhipu AI" data-pdi="0.2480" data-scale="0.3135" data-traj="0.2033" data-rigid="0.2065">CogVideoX-3</button>
                 </div>
               </td>
               <td>Zhipu AI</td>
               <td class="pdi-score pdi-good">0.2480</td>
-              <td>[0.1656, 0.4093]</td>
-              <td>0.3135</td>
-              <td><strong>0.2033</strong></td>
-              <td><strong>0.2065</strong></td>
-              <td>0.3065</td>
-              <td>3.6%</td>
-              <td>85.7%</td>
-              <td>
-                <div class="sample-preview" data-video="static/videos/carousel3.mp4">
-                  <img src="static/images/teaser.png" alt="CogVideoX sample preview">
-                  <video muted loop playsinline preload="metadata">
-                    <source src="static/videos/carousel3.mp4" type="video/mp4">
-                  </video>
-                </div>
-              </td>
-              <td><input type="checkbox" class="compare-check" data-model="CogVideoX-3" data-pdi="0.2480" data-scale="0.3135" data-traj="0.2033" data-rigid="0.2065" data-mathpass="85.7" data-video="static/videos/carousel3.mp4"></td>
+              <td><button type="button" class="button is-small is-dark model-open-btn" data-model="CogVideoX-3" data-org="Zhipu AI" data-pdi="0.2480" data-scale="0.3135" data-traj="0.2033" data-rigid="0.2065">View Radar</button></td>
             </tr>
             <tr data-rank="4" data-pdi="0.4521" data-scale="0.7507" data-traj="0.2271" data-rigid="0.3049" data-mathpass="50.0">
               <td>4</td>
               <td>
                 <div class="model-cell">
                   <img src="static/images/google.png" alt="Veo logo">
-                  <span>Veo 3.1</span>
+                  <button type="button" class="model-detail-trigger" data-model="Veo 3.1" data-org="Google" data-pdi="0.4521" data-scale="0.7507" data-traj="0.2271" data-rigid="0.3049">Veo 3.1</button>
                 </div>
               </td>
               <td>Google</td>
               <td class="pdi-score pdi-mid">0.4521</td>
-              <td>[0.2611, 0.7247]</td>
-              <td>0.7507</td>
-              <td>0.2271</td>
-              <td>0.3049</td>
-              <td>0.6980</td>
-              <td>7.1%</td>
-              <td>50.0%</td>
-              <td>
-                <div class="sample-preview" data-video="static/videos/carousel1.mp4">
-                  <img src="static/images/teaser.png" alt="Veo sample preview">
-                  <video muted loop playsinline preload="metadata">
-                    <source src="static/videos/carousel1.mp4" type="video/mp4">
-                  </video>
-                </div>
-              </td>
-              <td><input type="checkbox" class="compare-check" data-model="Veo 3.1" data-pdi="0.4521" data-scale="0.7507" data-traj="0.2271" data-rigid="0.3049" data-mathpass="50.0" data-video="static/videos/carousel1.mp4"></td>
+              <td><button type="button" class="button is-small is-dark model-open-btn" data-model="Veo 3.1" data-org="Google" data-pdi="0.4521" data-scale="0.7507" data-traj="0.2271" data-rigid="0.3049">View Radar</button></td>
             </tr>
             <tr data-rank="5" data-pdi="0.5595" data-scale="0.9317" data-traj="0.2096" data-rigid="0.5150" data-mathpass="67.9">
               <td>5</td>
               <td>
                 <div class="model-cell">
                   <img src="static/images/wan22.png" alt="Wan logo">
-                  <span>Wan 2.2</span>
+                  <button type="button" class="model-detail-trigger" data-model="Wan 2.2" data-org="Alibaba" data-pdi="0.5595" data-scale="0.9317" data-traj="0.2096" data-rigid="0.5150">Wan 2.2</button>
                 </div>
               </td>
               <td>Alibaba</td>
               <td class="pdi-score pdi-mid">0.5595</td>
-              <td>[0.2572, 1.0766]</td>
-              <td>0.9317</td>
-              <td>0.2096</td>
-              <td>0.5150</td>
-              <td>1.2301</td>
-              <td>7.1%</td>
-              <td>67.9%</td>
-              <td>
-                <div class="sample-preview" data-video="static/videos/carousel2.mp4">
-                  <img src="static/images/teaser.png" alt="Wan sample preview">
-                  <video muted loop playsinline preload="metadata">
-                    <source src="static/videos/carousel2.mp4" type="video/mp4">
-                  </video>
-                </div>
-              </td>
-              <td><input type="checkbox" class="compare-check" data-model="Wan 2.2" data-pdi="0.5595" data-scale="0.9317" data-traj="0.2096" data-rigid="0.5150" data-mathpass="67.9" data-video="static/videos/carousel2.mp4"></td>
+              <td><button type="button" class="button is-small is-dark model-open-btn" data-model="Wan 2.2" data-org="Alibaba" data-pdi="0.5595" data-scale="0.9317" data-traj="0.2096" data-rigid="0.5150">View Radar</button></td>
             </tr>
             <tr data-rank="6" data-pdi="0.8255" data-scale="1.6753" data-traj="0.2711" data-rigid="0.2345" data-mathpass="70.4">
               <td>6</td>
               <td>
                 <div class="model-cell">
                   <img src="static/images/sora.png" alt="Sora logo">
-                  <span>Sora</span>
+                  <button type="button" class="model-detail-trigger" data-model="Sora" data-org="OpenAI" data-pdi="0.8255" data-scale="1.6753" data-traj="0.2711" data-rigid="0.2345">Sora</button>
                 </div>
               </td>
               <td>OpenAI</td>
               <td class="pdi-score pdi-high">0.8255</td>
-              <td>[0.2652, 1.4847]</td>
-              <td>1.6753</td>
-              <td>0.2711</td>
-              <td>0.2345</td>
-              <td>1.7312</td>
-              <td>14.3%</td>
-              <td>70.4%</td>
-              <td>
-                <div class="sample-preview" data-video="static/videos/carousel3.mp4">
-                  <img src="static/images/teaser.png" alt="Sora sample preview">
-                  <video muted loop playsinline preload="metadata">
-                    <source src="static/videos/carousel3.mp4" type="video/mp4">
-                  </video>
-                </div>
-              </td>
-              <td><input type="checkbox" class="compare-check" data-model="Sora" data-pdi="0.8255" data-scale="1.6753" data-traj="0.2711" data-rigid="0.2345" data-mathpass="70.4" data-video="static/videos/carousel3.mp4"></td>
+              <td><button type="button" class="button is-small is-dark model-open-btn" data-model="Sora" data-org="OpenAI" data-pdi="0.8255" data-scale="1.6753" data-traj="0.2711" data-rigid="0.2345">View Radar</button></td>
             </tr>
             <tr data-rank="7" data-pdi="0.8825" data-scale="1.8469" data-traj="0.2515" data-rigid="0.2160" data-mathpass="57.1">
               <td>7</td>
               <td>
                 <div class="model-cell">
-                  <span class="logo-placeholder">TH</span>
-                  <span>HunyuanVideo</span>
+                  <img src="static/images/hunyuan.png" alt="Hunyuan logo">
+                  <button type="button" class="model-detail-trigger" data-model="HunyuanVideo" data-org="Tencent Hunyuan" data-pdi="0.8825" data-scale="1.8469" data-traj="0.2515" data-rigid="0.2160">HunyuanVideo</button>
                 </div>
               </td>
               <td>Tencent Hunyuan</td>
               <td class="pdi-score pdi-high">0.8825</td>
-              <td>[0.3094, 1.6018]</td>
-              <td>1.8469</td>
-              <td>0.2515</td>
-              <td>0.2160</td>
-              <td>1.7730</td>
-              <td>14.3%</td>
-              <td>57.1%</td>
-              <td>
-                <div class="sample-preview" data-video="static/videos/carousel1.mp4">
-                  <img src="static/images/teaser.png" alt="Hunyuan sample preview">
-                  <video muted loop playsinline preload="metadata">
-                    <source src="static/videos/carousel1.mp4" type="video/mp4">
-                  </video>
-                </div>
-              </td>
-              <td><input type="checkbox" class="compare-check" data-model="HunyuanVideo" data-pdi="0.8825" data-scale="1.8469" data-traj="0.2515" data-rigid="0.2160" data-mathpass="57.1" data-video="static/videos/carousel1.mp4"></td>
+              <td><button type="button" class="button is-small is-dark model-open-btn" data-model="HunyuanVideo" data-org="Tencent Hunyuan" data-pdi="0.8825" data-scale="1.8469" data-traj="0.2515" data-rigid="0.2160">View Radar</button></td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div class="leaderboard-footer">
-        <button class="button is-small is-dark" id="openCompareBtn" type="button">Compare Selected Models</button>
-        <span class="leaderboard-hint">Select exactly 2 rows to compare videos and metric deltas.</span>
-      </div>
+      <p class="leaderboard-hint">Click a model name or "View Radar" to open the three-metric radar chart.</p>
     </div>
 
     <div class="leaderboard-panel" id="scenarioLeaderboard">
@@ -588,21 +472,33 @@
   </div>
 </section>
 
-<div class="compare-modal" id="compareModal" aria-hidden="true">
-  <div class="compare-modal-card">
-    <div class="compare-modal-header">
-      <h3>Model Comparison</h3>
-      <button type="button" id="closeCompareModal" aria-label="Close compare modal">×</button>
+<div class="radar-modal" id="radarModal" aria-hidden="true">
+  <div class="radar-modal-card">
+    <div class="radar-modal-header">
+      <h3 id="radarTitle">Model Radar</h3>
+      <button type="button" id="closeRadarModal" aria-label="Close radar modal">×</button>
     </div>
-    <p id="compareDeltaText" class="compare-delta"></p>
-    <div class="compare-grid">
-      <div class="compare-item">
-        <h4 id="compareModelA">Model A</h4>
-        <video id="compareVideoA" controls muted preload="metadata"></video>
-      </div>
-      <div class="compare-item">
-        <h4 id="compareModelB">Model B</h4>
-        <video id="compareVideoB" controls muted preload="metadata"></video>
+    <p class="radar-subtitle" id="radarSubtitle"></p>
+    <div class="radar-layout">
+      <canvas id="radarCanvas" width="340" height="300"></canvas>
+      <div class="radar-metrics">
+        <div class="metric-chip">
+          <span>Scale εs</span>
+          <strong id="metricScale">-</strong>
+        </div>
+        <div class="metric-chip">
+          <span>Traj εt</span>
+          <strong id="metricTraj">-</strong>
+        </div>
+        <div class="metric-chip">
+          <span>Rigid εr</span>
+          <strong id="metricRigid">-</strong>
+        </div>
+        <div class="metric-chip metric-chip-accent">
+          <span>PDI Score</span>
+          <strong id="metricPdi">-</strong>
+        </div>
+        <p class="radar-note">Radar uses normalized physical consistency (higher is better after normalization).</p>
       </div>
     </div>
   </div>
