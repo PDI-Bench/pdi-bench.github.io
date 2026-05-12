@@ -253,7 +253,7 @@ function drawRadarChart(canvas, values) {
 function setupModelRadar() {
     const modal = document.getElementById('radarModal');
     const closeBtn = document.getElementById('closeRadarModal');
-    const triggers = document.querySelectorAll('.model-detail-trigger, .model-open-btn');
+    const triggers = document.querySelectorAll('.model-open-btn');
     if (!modal || !closeBtn || triggers.length === 0) return;
 
     const title = document.getElementById('radarTitle');
