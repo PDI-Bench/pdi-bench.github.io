@@ -431,6 +431,10 @@
       <h3 id="radarTitle">Model Radar</h3>
       <button type="button" id="closeRadarModal" aria-label="Close radar modal">×</button>
     </div>
+    <div class="radar-mode-toggle" role="group" aria-label="Radar scale mode">
+      <button type="button" class="radar-mode-btn is-active" id="radarModeNormalized">Normalized</button>
+      <button type="button" class="radar-mode-btn" id="radarModeRaw">Raw</button>
+    </div>
     <p class="radar-subtitle" id="radarSubtitle"></p>
     <div class="radar-layout">
       <canvas id="radarCanvas" width="340" height="300"></canvas>
@@ -451,7 +455,7 @@
           <span>PDI Score</span>
           <strong id="metricPdi">-</strong>
         </div>
-        <p class="radar-note">Radar uses a unified normalized error scale across generated models (closer to center is better); GT is shown as the gray baseline.</p>
+        <p class="radar-note" id="radarNote">Radar uses a unified normalized error scale across generated models (closer to center is better); GT is shown as the gray baseline.</p>
       </div>
     </div>
   </div>

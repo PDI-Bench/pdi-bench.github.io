@@ -545,6 +545,29 @@ body {
   color: var(--text-secondary);
 }
 
+.radar-mode-toggle {
+  display: inline-flex;
+  gap: 0.35rem;
+  margin-top: 0.25rem;
+}
+
+.radar-mode-btn {
+  border: 1px solid var(--border-color);
+  background: var(--background-primary);
+  color: var(--text-secondary);
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.radar-mode-btn.is-active {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
 .radar-layout {
   display: grid;
   grid-template-columns: minmax(260px, 360px) 1fr;

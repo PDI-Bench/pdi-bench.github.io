@@ -290,6 +290,9 @@ function setupModelRadar() {
     const metricTraj = document.getElementById('metricTraj');
     const metricRigid = document.getElementById('metricRigid');
     const metricPdi = document.getElementById('metricPdi');
+    const radarNote = document.getElementById('radarNote');
+    const modeNormalizedBtn = document.getElementById('radarModeNormalized');
+    const modeRawBtn = document.getElementById('radarModeRaw');
     const canvas = document.getElementById('radarCanvas');
     const rows = Array.from(document.querySelectorAll('#leaderboardBodyCompact tr'));
 
@@ -315,11 +318,48 @@ function setupModelRadar() {
     const gtScaleRaw = parseFloat(gtRow?.dataset.scale || '0');
     const gtTrajRaw = parseFloat(gtRow?.dataset.traj || '0');
     const gtRigidRaw = parseFloat(gtRow?.dataset.rigid || '0');
-    const gtNormalized = [
-        gtScaleRaw / maxScale,
-        gtTrajRaw / maxTraj,
-        gtRigidRaw / maxRigid
-    ];
+    const globalMax = Math.max(maxScale, maxTraj, maxRigid);
+
+    let radarMode = 'normalized';
+    let activeSelection = null;
+    let activeOrg = '';
+
+    const toModeValues = (scale, traj, rigid, mode) => {
+        if (mode === 'raw') {
+            return [
+                scale / globalMax,
+                traj / globalMax,
+                rigid / globalMax
+            ];
+        }
+        return [
+            scale / maxScale,
+            traj / maxTraj,
+            rigid / maxRigid
+        ];
+    };
+
+    const updateModeUi = () => {
+        if (modeNormalizedBtn) modeNormalizedBtn.classList.toggle('is-active', radarMode === 'normalized');
+        if (modeRawBtn) modeRawBtn.classList.toggle('is-active', radarMode === 'raw');
+        if (radarNote) {
+            radarNote.textContent = radarMode === 'raw'
+                ? 'Radar uses a unified raw error scale (shared global max); closer to center is better. GT is shown as the gray baseline.'
+                : 'Radar uses per-axis normalized error scales across generated models; closer to center is better. GT is shown as the gray baseline.';
+        }
+    };
+
+    const updateSubtitle = () => {
+        if (!activeOrg) return;
+        subtitle.textContent = `${activeOrg} | ${radarMode === 'raw' ? 'Raw' : 'Normalized'} mode with GT as gray baseline.`;
+    };
+
+    const renderRadar = () => {
+        if (!activeSelection) return;
+        const gtValues = toModeValues(gtScaleRaw, gtTrajRaw, gtRigidRaw, radarMode);
+        const modelValues = toModeValues(activeSelection.scale, activeSelection.traj, activeSelection.rigid, radarMode);
+        drawRadarChart(canvas, modelValues, gtValues);
+    };
 
     triggers.forEach((trigger) => {
         trigger.addEventListener('click', () => {
@@ -329,26 +369,39 @@ function setupModelRadar() {
             const scale = parseFloat(trigger.dataset.scale);
             const traj = parseFloat(trigger.dataset.traj);
             const rigid = parseFloat(trigger.dataset.rigid);
+            activeSelection = { scale, traj, rigid };
+            activeOrg = org;
 
             title.textContent = `${model} Radar Profile`;
-            subtitle.textContent = `${org} | Unified scale across all generated models, with GT as gray baseline.`;
+            updateSubtitle();
             metricScale.textContent = scale.toFixed(4);
             metricTraj.textContent = traj.toFixed(4);
             metricRigid.textContent = rigid.toFixed(4);
             metricPdi.textContent = pdi.toFixed(4);
-
-            const normalized = [
-                scale / maxScale,
-                traj / maxTraj,
-                rigid / maxRigid
-            ];
-            drawRadarChart(canvas, normalized, gtNormalized);
+            updateModeUi();
+            renderRadar();
 
             modal.classList.add('is-open');
             modal.style.display = 'flex';
             modal.setAttribute('aria-hidden', 'false');
         });
     });
+
+    if (modeNormalizedBtn && modeRawBtn) {
+        modeNormalizedBtn.addEventListener('click', () => {
+            radarMode = 'normalized';
+            updateModeUi();
+            updateSubtitle();
+            renderRadar();
+        });
+
+        modeRawBtn.addEventListener('click', () => {
+            radarMode = 'raw';
+            updateModeUi();
+            updateSubtitle();
+            renderRadar();
+        });
+    }
 
     closeBtn.addEventListener('click', () => {
         modal.classList.remove('is-open');
