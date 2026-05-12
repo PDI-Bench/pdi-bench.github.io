@@ -265,6 +265,18 @@ function setupModelRadar() {
     const canvas = document.getElementById('radarCanvas');
     const rows = Array.from(document.querySelectorAll('#leaderboardBodyCompact tr'));
 
+    // Enforce modal behavior even if stylesheet cache is stale.
+    Object.assign(modal.style, {
+        position: 'fixed',
+        inset: '0',
+        background: 'rgba(15, 23, 42, 0.55)',
+        display: 'none',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '1rem',
+        zIndex: '2000'
+    });
+
     const maxScale = Math.max(...rows.map((row) => parseFloat(row.dataset.scale || '0')));
     const maxTraj = Math.max(...rows.map((row) => parseFloat(row.dataset.traj || '0')));
     const maxRigid = Math.max(...rows.map((row) => parseFloat(row.dataset.rigid || '0')));
@@ -293,17 +305,25 @@ function setupModelRadar() {
             drawRadarChart(canvas, normalized);
 
             modal.classList.add('is-open');
+            modal.style.display = 'flex';
             modal.setAttribute('aria-hidden', 'false');
         });
     });
 
     closeBtn.addEventListener('click', () => {
         modal.classList.remove('is-open');
+        modal.style.display = 'none';
         modal.setAttribute('aria-hidden', 'true');
     });
 
     modal.addEventListener('click', (event) => {
         if (event.target === modal) closeBtn.click();
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') {
+            closeBtn.click();
+        }
     });
 }
 
