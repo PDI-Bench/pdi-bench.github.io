@@ -316,8 +316,6 @@
       <p class="leaderboard-subtitle">Quantitative comparison of physical consistency on PDI-Bench. Lower PDI is better.</p>
       <div class="leaderboard-actions">
         <button class="leaderboard-tab is-active" data-target="mainLeaderboard" type="button">Main Leaderboard</button>
-        <button class="leaderboard-tab" data-target="scenarioLeaderboard" type="button">Scenario Breakdown</button>
-        <a class="button is-small is-dark" href="https://huggingface.co/datasets/AnteaWu/PDI-Dataset" target="_blank">Submit your model</a>
       </div>
     </div>
 
@@ -424,51 +422,6 @@
       <p class="leaderboard-hint">Click "View Radar" to open the three-metric radar chart.</p>
     </div>
 
-    <div class="leaderboard-panel" id="scenarioLeaderboard">
-      <div class="table-container">
-        <table class="table is-fullwidth leaderboard-table scenario-table">
-          <thead>
-            <tr>
-              <th>Scenario</th>
-              <th>Best Model</th>
-              <th>Primary Failure Mode</th>
-              <th>Best PDI ↓</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Axial Rigid</td>
-              <td>Seedance 2.0</td>
-              <td>Scale Drift</td>
-              <td>0.219</td>
-              <td>Most stable projection-scale coupling.</td>
-            </tr>
-            <tr>
-              <td>Orbital Rotation</td>
-              <td>CogVideoX-3</td>
-              <td>Trajectory Jitter</td>
-              <td>0.241</td>
-              <td>Best trajectory continuity under camera motion.</td>
-            </tr>
-            <tr>
-              <td>Partial Occlusion</td>
-              <td>Seedance 2.0</td>
-              <td>Structural Deformation</td>
-              <td>0.268</td>
-              <td>Lowest rigid residual under heavy occlusion.</td>
-            </tr>
-            <tr>
-              <td>Nonhuman Bio Tracking</td>
-              <td>Sora</td>
-              <td>Non-Euclidean Morphing</td>
-              <td>0.703</td>
-              <td>Improves temporal continuity but rigidness remains weak.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -498,7 +451,7 @@
           <span>PDI Score</span>
           <strong id="metricPdi">-</strong>
         </div>
-        <p class="radar-note">Radar uses normalized physical consistency (higher is better after normalization).</p>
+        <p class="radar-note">Radar uses a unified normalized scale across generated models; GT is shown as the gray baseline.</p>
       </div>
     </div>
   </div>

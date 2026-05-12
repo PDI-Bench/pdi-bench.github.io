@@ -186,7 +186,7 @@ function setupLeaderboardSorting() {
     });
 }
 
-function drawRadarChart(canvas, values) {
+function drawRadarChart(canvas, values, gtValues) {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     const width = canvas.width;
@@ -224,8 +224,26 @@ function drawRadarChart(canvas, values) {
         ctx.stroke();
     });
 
-    // data polygon
-    ctx.fillStyle = 'rgba(37, 99, 235, 0.25)';
+    // GT baseline polygon (gray)
+    if (gtValues && gtValues.length === 3) {
+        ctx.fillStyle = 'rgba(100, 116, 139, 0.14)';
+        ctx.strokeStyle = '#64748b';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        gtValues.forEach((val, idx) => {
+            const r = radius * Math.max(0, Math.min(1, val));
+            const x = cx + Math.cos(angles[idx]) * r;
+            const y = cy + Math.sin(angles[idx]) * r;
+            if (idx === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        });
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+    }
+
+    // Selected model polygon (blue)
+    ctx.fillStyle = 'rgba(37, 99, 235, 0.24)';
     ctx.strokeStyle = '#2563eb';
     ctx.lineWidth = 2;
     ctx.beginPath();
@@ -248,6 +266,16 @@ function drawRadarChart(canvas, values) {
         const ly = cy + Math.sin(angles[idx]) * (radius + 18);
         ctx.fillText(label, lx - 16, ly + 5);
     });
+
+    // legend
+    ctx.fillStyle = '#2563eb';
+    ctx.fillRect(18, 16, 12, 12);
+    ctx.fillStyle = '#1e293b';
+    ctx.fillText('Selected Model', 36, 26);
+    ctx.fillStyle = '#64748b';
+    ctx.fillRect(18, 36, 12, 12);
+    ctx.fillStyle = '#1e293b';
+    ctx.fillText('GT Baseline', 36, 46);
 }
 
 function setupModelRadar() {
@@ -277,9 +305,21 @@ function setupModelRadar() {
         zIndex: '2000'
     });
 
-    const maxScale = Math.max(...rows.map((row) => parseFloat(row.dataset.scale || '0')));
-    const maxTraj = Math.max(...rows.map((row) => parseFloat(row.dataset.traj || '0')));
-    const maxRigid = Math.max(...rows.map((row) => parseFloat(row.dataset.rigid || '0')));
+    // Use fixed bounds from the 6 generated models for a unified scale.
+    const generatedRows = rows.filter((row) => !row.classList.contains('baseline-row'));
+    const maxScale = Math.max(...generatedRows.map((row) => parseFloat(row.dataset.scale || '0')));
+    const maxTraj = Math.max(...generatedRows.map((row) => parseFloat(row.dataset.traj || '0')));
+    const maxRigid = Math.max(...generatedRows.map((row) => parseFloat(row.dataset.rigid || '0')));
+
+    const gtRow = rows.find((row) => row.classList.contains('baseline-row'));
+    const gtScaleRaw = parseFloat(gtRow?.dataset.scale || '0');
+    const gtTrajRaw = parseFloat(gtRow?.dataset.traj || '0');
+    const gtRigidRaw = parseFloat(gtRow?.dataset.rigid || '0');
+    const gtNormalized = [
+        1 - gtScaleRaw / maxScale,
+        1 - gtTrajRaw / maxTraj,
+        1 - gtRigidRaw / maxRigid
+    ];
 
     triggers.forEach((trigger) => {
         trigger.addEventListener('click', () => {
@@ -291,7 +331,7 @@ function setupModelRadar() {
             const rigid = parseFloat(trigger.dataset.rigid);
 
             title.textContent = `${model} Radar Profile`;
-            subtitle.textContent = `${org} | Lower raw residuals are better.`;
+            subtitle.textContent = `${org} | Unified scale across all generated models, with GT as gray baseline.`;
             metricScale.textContent = scale.toFixed(4);
             metricTraj.textContent = traj.toFixed(4);
             metricRigid.textContent = rigid.toFixed(4);
@@ -302,7 +342,7 @@ function setupModelRadar() {
                 1 - traj / maxTraj,
                 1 - rigid / maxRigid
             ];
-            drawRadarChart(canvas, normalized);
+            drawRadarChart(canvas, normalized, gtNormalized);
 
             modal.classList.add('is-open');
             modal.style.display = 'flex';
