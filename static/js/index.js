@@ -316,9 +316,9 @@ function setupModelRadar() {
     const gtTrajRaw = parseFloat(gtRow?.dataset.traj || '0');
     const gtRigidRaw = parseFloat(gtRow?.dataset.rigid || '0');
     const gtNormalized = [
-        1 - gtScaleRaw / maxScale,
-        1 - gtTrajRaw / maxTraj,
-        1 - gtRigidRaw / maxRigid
+        gtScaleRaw / maxScale,
+        gtTrajRaw / maxTraj,
+        gtRigidRaw / maxRigid
     ];
 
     triggers.forEach((trigger) => {
@@ -338,9 +338,9 @@ function setupModelRadar() {
             metricPdi.textContent = pdi.toFixed(4);
 
             const normalized = [
-                1 - scale / maxScale,
-                1 - traj / maxTraj,
-                1 - rigid / maxRigid
+                scale / maxScale,
+                traj / maxTraj,
+                rigid / maxRigid
             ];
             drawRadarChart(canvas, normalized, gtNormalized);
 
