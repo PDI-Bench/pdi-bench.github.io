@@ -759,8 +759,8 @@ main > .hero:first-child + .hero .hero-body {
 }
 
 .abstract-section .content.has-text-justified {
-  font-size: 0.98rem;
-  line-height: 1.65;
+  font-size: 0.92rem;
+  line-height: 1.58;
 }
 
 /* Footer Improvements */
