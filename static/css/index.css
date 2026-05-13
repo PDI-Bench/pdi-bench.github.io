@@ -118,9 +118,9 @@ body {
     font-family: 'Inter', sans-serif !important;
     font-weight: 800 !important;
     color: var(--text-primary) !important;
-    font-size: 1.0rem !important;
-    margin-bottom: 0.4rem !important;
-    line-height: 0.4 !important;
+    font-size: 1.75rem !important;
+    margin-bottom: 1.2rem !important;
+    line-height: 1.2 !important;
 }
 
 .publication-banner {
