@@ -427,23 +427,34 @@
 </section>
 <!-- End teaser video -->
 
-<!-- Image carousel -->
-<section class="hero is-small">
+<!-- Pipeline and metric images -->
+<section class="hero is-small dual-figure-section">
   <div class="hero-body">
     <div class="container">
-      <div id="results-carousel-pipeline" class="results-carousel">
-       <div class="item">
-        <!-- TODO: Replace with your research result images -->
-        <img src="static/images/pipeline.png" alt="First research result visualization" loading="lazy"/>
-        <!-- TODO: Replace with description of this result -->
-        <h2 class="subtitle has-text-centered">
-          PDI-Bench pipeline.
-        </h2>
+      <div class="dual-figure-grid">
+        <div id="results-carousel-pipeline" class="results-carousel">
+          <div class="item">
+            <img src="static/images/pipeline.png" alt="PDI-Bench pipeline visualization" loading="lazy"/>
+            <h2 class="subtitle has-text-centered">
+              PDI-Bench pipeline.
+            </h2>
+          </div>
+        </div>
+        <div id="results-carousel-metrics" class="results-carousel">
+          <div class="item">
+            <img src="static/images/metric.png" alt="PDI-Bench geometric metrics visualization" loading="lazy"/>
+            <h2 class="subtitle has-text-centered">
+              <strong>The three key perspectives in PDI-Bench for geometric consistency:</strong>
+              <strong>(Left) Scale-Depth Alignment:</strong> Based on the pinhole camera model, we verify whether the product of projected height (h) and depth (Z) remains constant.
+              <strong>(Middle) 3D Motion Consistency:</strong> We audit the smoothness of 3D world trajectories.
+              <strong>(Right) 3D Structural Rigidity:</strong> By monitoring internal 3D pairwise distances between anchors, we detect non-Euclidean deformations.
+            </h2>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  </div>
-  </section>
+</section>
 
 <div class="radar-modal" id="radarModal" aria-hidden="true">
   <div class="radar-modal-card">
@@ -482,26 +493,7 @@
   </div>
 </div>
 
-<!-- Image carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel-metrics" class="results-carousel">
-       <div class="item">
-        <!-- TODO: Replace with your research result images -->
-        <img src="static/images/metric.png" alt="First research result visualization" loading="lazy"/>
-        <!-- TODO: Replace with description of this result -->
-        <h2 class="subtitle has-text-centered">
-          <strong>The three key perspectives in PDI-Bench for geometric consistency:</strong>
-          <strong>(Left) Scale-Depth Alignment:</strong> Based on the pinhole camera model, we verify whether the product of projected height (h) and depth (Z) remains constant.
-          <strong>(Middle) 3D Motion Consistency:</strong> We audit the smoothness of 3D world trajectories.
-          <strong>(Right) 3D Structural Rigidity:</strong> By monitoring internal 3D pairwise distances between anchors, we detect non-Euclidean deformations.
-        </h2>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End image carousel -->
+<!-- End pipeline and metric images -->
 
 <!-- Example videos -->
 <section class="hero is-small example-videos-section">
