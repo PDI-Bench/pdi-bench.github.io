@@ -291,8 +291,6 @@ function setupModelRadar() {
     const metricRigid = document.getElementById('metricRigid');
     const metricPdi = document.getElementById('metricPdi');
     const radarNote = document.getElementById('radarNote');
-    const modeNormalizedBtn = document.getElementById('radarModeNormalized');
-    const modeRawBtn = document.getElementById('radarModeRaw');
     const canvas = document.getElementById('radarCanvas');
     const rows = Array.from(document.querySelectorAll('#leaderboardBodyCompact tr'));
 
@@ -318,46 +316,29 @@ function setupModelRadar() {
     const gtScaleRaw = parseFloat(gtRow?.dataset.scale || '0');
     const gtTrajRaw = parseFloat(gtRow?.dataset.traj || '0');
     const gtRigidRaw = parseFloat(gtRow?.dataset.rigid || '0');
-    const globalMax = Math.max(maxScale, maxTraj, maxRigid);
-
-    let radarMode = 'normalized';
     let activeSelection = null;
     let activeOrg = '';
 
-    const toModeValues = (scale, traj, rigid, mode) => {
-        if (mode === 'raw') {
-            return [
-                scale / globalMax,
-                traj / globalMax,
-                rigid / globalMax
-            ];
-        }
+    const toScoreValues = (scale, traj, rigid) => {
         return [
-            scale / maxScale,
-            traj / maxTraj,
-            rigid / maxRigid
+            1 - scale / maxScale,
+            1 - traj / maxTraj,
+            1 - rigid / maxRigid
         ];
-    };
-
-    const updateModeUi = () => {
-        if (modeNormalizedBtn) modeNormalizedBtn.classList.toggle('is-active', radarMode === 'normalized');
-        if (modeRawBtn) modeRawBtn.classList.toggle('is-active', radarMode === 'raw');
-        if (radarNote) {
-            radarNote.textContent = radarMode === 'raw'
-                ? 'Radar uses a unified raw error scale (shared global max); closer to center is better. GT is shown as the gray baseline.'
-                : 'Radar uses per-axis normalized error scales across generated models; closer to center is better. GT is shown as the gray baseline.';
-        }
     };
 
     const updateSubtitle = () => {
         if (!activeOrg) return;
-        subtitle.textContent = `${activeOrg} | ${radarMode === 'raw' ? 'Raw' : 'Normalized'} mode with GT as gray baseline.`;
+        subtitle.textContent = `${activeOrg} | Normalized physical consistency (higher is better), with GT as gray baseline.`;
+        if (radarNote) {
+            radarNote.textContent = 'Radar uses normalized physical consistency scores (higher is better); GT is shown as the gray baseline.';
+        }
     };
 
     const renderRadar = () => {
         if (!activeSelection) return;
-        const gtValues = toModeValues(gtScaleRaw, gtTrajRaw, gtRigidRaw, radarMode);
-        const modelValues = toModeValues(activeSelection.scale, activeSelection.traj, activeSelection.rigid, radarMode);
+        const gtValues = toScoreValues(gtScaleRaw, gtTrajRaw, gtRigidRaw);
+        const modelValues = toScoreValues(activeSelection.scale, activeSelection.traj, activeSelection.rigid);
         drawRadarChart(canvas, modelValues, gtValues);
     };
 
@@ -378,7 +359,6 @@ function setupModelRadar() {
             metricTraj.textContent = traj.toFixed(4);
             metricRigid.textContent = rigid.toFixed(4);
             metricPdi.textContent = pdi.toFixed(4);
-            updateModeUi();
             renderRadar();
 
             modal.classList.add('is-open');
@@ -386,22 +366,6 @@ function setupModelRadar() {
             modal.setAttribute('aria-hidden', 'false');
         });
     });
-
-    if (modeNormalizedBtn && modeRawBtn) {
-        modeNormalizedBtn.addEventListener('click', () => {
-            radarMode = 'normalized';
-            updateModeUi();
-            updateSubtitle();
-            renderRadar();
-        });
-
-        modeRawBtn.addEventListener('click', () => {
-            radarMode = 'raw';
-            updateModeUi();
-            updateSubtitle();
-            renderRadar();
-        });
-    }
 
     closeBtn.addEventListener('click', () => {
         modal.classList.remove('is-open');

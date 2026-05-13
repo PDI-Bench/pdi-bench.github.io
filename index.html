@@ -252,44 +252,6 @@
 </section>
 
 
-<!-- Teaser video-->
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <!-- TODO: Replace with your teaser video -->
-      <video poster="" id="tree" autoplay controls muted loop height="100%" preload="metadata">
-        <!-- TODO: Add your video file path here -->
-        <source src="static/videos/bus_hero.mp4" type="video/mp4">
-      </video>
-      <!-- TODO: Replace with your video description -->
-      <div class="subtitle has-text-centered pipeline-caption">
-        <strong>Visualization of the PDI-Bench Target-Uplift-Anchor pipeline.</strong><br>
-        <span><strong>Step 1: Semantic Targeting (SAM 2)</strong> isolates the auditing subject to establish precise 2D spatial boundaries.</span>
-        <span><strong>Step 2: 3D Geometric Uplifting (MegaSaM)</strong> reconstructs the physical environment and projects pixels into a unified 3D world-space pointmap.</span>
-        <span><strong>Step 3: 3D Structural Anchoring (CoTracker3)</strong> tracks dense pixel-space anchors and lifts them into structurally meaningful 3D trajectories for subsequent rigidity auditing.</span>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End teaser video -->
-<!-- Image carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel-pipeline" class="results-carousel">
-       <div class="item">
-        <!-- TODO: Replace with your research result images -->
-        <img src="static/images/pipeline.png" alt="First research result visualization" loading="lazy"/>
-        <!-- TODO: Replace with description of this result -->
-        <h2 class="subtitle has-text-centered">
-          PDI-Bench pipeline.
-        </h2>
-      </div>
-    </div>
-  </div>
-  </div>
-  </section>
-
 <!-- Benchmark overview image -->
 <section class="hero is-small">
   <div class="hero-body">
@@ -425,15 +387,49 @@
   </div>
 </section>
 
+<!-- Teaser video-->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <!-- TODO: Replace with your teaser video -->
+      <video poster="" id="tree" autoplay controls muted loop height="100%" preload="metadata">
+        <!-- TODO: Add your video file path here -->
+        <source src="static/videos/bus_hero.mp4" type="video/mp4">
+      </video>
+      <!-- TODO: Replace with your video description -->
+      <div class="subtitle has-text-centered pipeline-caption">
+        <strong>Visualization of the PDI-Bench Target-Uplift-Anchor pipeline.</strong><br>
+        <span><strong>Step 1: Semantic Targeting (SAM 2)</strong> isolates the auditing subject to establish precise 2D spatial boundaries.</span>
+        <span><strong>Step 2: 3D Geometric Uplifting (MegaSaM)</strong> reconstructs the physical environment and projects pixels into a unified 3D world-space pointmap.</span>
+        <span><strong>Step 3: 3D Structural Anchoring (CoTracker3)</strong> tracks dense pixel-space anchors and lifts them into structurally meaningful 3D trajectories for subsequent rigidity auditing.</span>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End teaser video -->
+<!-- Image carousel -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel-pipeline" class="results-carousel">
+       <div class="item">
+        <!-- TODO: Replace with your research result images -->
+        <img src="static/images/pipeline.png" alt="First research result visualization" loading="lazy"/>
+        <!-- TODO: Replace with description of this result -->
+        <h2 class="subtitle has-text-centered">
+          PDI-Bench pipeline.
+        </h2>
+      </div>
+    </div>
+  </div>
+  </div>
+  </section>
+
 <div class="radar-modal" id="radarModal" aria-hidden="true">
   <div class="radar-modal-card">
     <div class="radar-modal-header">
       <h3 id="radarTitle">Model Radar</h3>
       <button type="button" id="closeRadarModal" aria-label="Close radar modal">×</button>
-    </div>
-    <div class="radar-mode-toggle" role="group" aria-label="Radar scale mode">
-      <button type="button" class="radar-mode-btn is-active" id="radarModeNormalized">Normalized</button>
-      <button type="button" class="radar-mode-btn" id="radarModeRaw">Raw</button>
     </div>
     <p class="radar-subtitle" id="radarSubtitle"></p>
     <div class="radar-layout">
@@ -455,7 +451,7 @@
           <span>PDI Score</span>
           <strong id="metricPdi">-</strong>
         </div>
-        <p class="radar-note" id="radarNote">Radar uses a unified normalized error scale across generated models (closer to center is better); GT is shown as the gray baseline.</p>
+        <p class="radar-note" id="radarNote">Radar uses normalized physical consistency scores (higher is better); GT is shown as the gray baseline.</p>
       </div>
     </div>
   </div>
