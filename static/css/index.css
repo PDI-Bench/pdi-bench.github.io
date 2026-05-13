@@ -330,7 +330,7 @@ main > .hero:first-child + .hero .hero-body {
 
 #results-carousel-pipeline .item img,
 #results-carousel-metrics .item img {
-  width: 90%;
+  width: 99%;
   margin: 0 auto;
   display: block;
 }
