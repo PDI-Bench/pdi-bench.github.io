@@ -431,6 +431,10 @@
       <h3 id="radarTitle">Model Radar</h3>
       <button type="button" id="closeRadarModal" aria-label="Close radar modal">×</button>
     </div>
+    <div class="radar-mode-toggle" role="group" aria-label="Radar scoring mode">
+      <button type="button" class="radar-mode-btn is-active" id="radarModeMinMax">Min-Max</button>
+      <button type="button" class="radar-mode-btn" id="radarModeGtRatio">Relative-to-GT</button>
+    </div>
     <p class="radar-subtitle" id="radarSubtitle"></p>
     <div class="radar-layout">
       <canvas id="radarCanvas" width="340" height="300"></canvas>
@@ -451,7 +455,7 @@
           <span>PDI Score</span>
           <strong id="metricPdi">-</strong>
         </div>
-        <p class="radar-note" id="radarNote">Radar uses normalized physical consistency scores (higher is better); GT is shown as the gray baseline.</p>
+        <p class="radar-note" id="radarNote">Min-Max mode: score = (max - value) / (max - min), higher is better; GT is shown as the gray baseline.</p>
       </div>
     </div>
   </div>

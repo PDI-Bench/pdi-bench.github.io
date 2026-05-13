@@ -291,6 +291,8 @@ function setupModelRadar() {
     const metricRigid = document.getElementById('metricRigid');
     const metricPdi = document.getElementById('metricPdi');
     const radarNote = document.getElementById('radarNote');
+    const modeMinMaxBtn = document.getElementById('radarModeMinMax');
+    const modeGtRatioBtn = document.getElementById('radarModeGtRatio');
     const canvas = document.getElementById('radarCanvas');
     const rows = Array.from(document.querySelectorAll('#leaderboardBodyCompact tr'));
 
@@ -306,11 +308,19 @@ function setupModelRadar() {
         zIndex: '2000'
     });
 
-    // Use fixed bounds from the 6 generated models for a unified scale.
-    const generatedRows = rows.filter((row) => !row.classList.contains('baseline-row'));
-    const maxScale = Math.max(...generatedRows.map((row) => parseFloat(row.dataset.scale || '0')));
-    const maxTraj = Math.max(...generatedRows.map((row) => parseFloat(row.dataset.traj || '0')));
-    const maxRigid = Math.max(...generatedRows.map((row) => parseFloat(row.dataset.rigid || '0')));
+    // Stats for method A: min-max score on full leaderboard
+    const scales = rows.map((row) => parseFloat(row.dataset.scale || '0'));
+    const trajs = rows.map((row) => parseFloat(row.dataset.traj || '0'));
+    const rigids = rows.map((row) => parseFloat(row.dataset.rigid || '0'));
+    const minScale = Math.min(...scales);
+    const maxScale = Math.max(...scales);
+    const minTraj = Math.min(...trajs);
+    const maxTraj = Math.max(...trajs);
+    const minRigid = Math.min(...rigids);
+    const maxRigid = Math.max(...rigids);
+    const scaleRange = Math.max(maxScale - minScale, 1e-9);
+    const trajRange = Math.max(maxTraj - minTraj, 1e-9);
+    const rigidRange = Math.max(maxRigid - minRigid, 1e-9);
 
     const gtRow = rows.find((row) => row.classList.contains('baseline-row'));
     const gtScaleRaw = parseFloat(gtRow?.dataset.scale || '0');
@@ -318,27 +328,48 @@ function setupModelRadar() {
     const gtRigidRaw = parseFloat(gtRow?.dataset.rigid || '0');
     let activeSelection = null;
     let activeOrg = '';
+    let radarMode = 'minmax';
 
-    const toScoreValues = (scale, traj, rigid) => {
-        return [
-            1 - scale / maxScale,
-            1 - traj / maxTraj,
-            1 - rigid / maxRigid
-        ];
-    };
+    const clamp01 = (v) => Math.max(0, Math.min(1, v));
+    const safeDiv = (num, den) => (den === 0 ? 1 : num / den);
+
+    const toMinMaxScore = (scale, traj, rigid) => ([
+        clamp01((maxScale - scale) / scaleRange),
+        clamp01((maxTraj - traj) / trajRange),
+        clamp01((maxRigid - rigid) / rigidRange)
+    ]);
+
+    const toGtRatioScore = (scale, traj, rigid) => ([
+        clamp01(safeDiv(gtScaleRaw, scale)),
+        clamp01(safeDiv(gtTrajRaw, traj)),
+        clamp01(safeDiv(gtRigidRaw, rigid))
+    ]);
+
+    const toModeScore = (scale, traj, rigid) => (
+        radarMode === 'gtratio'
+            ? toGtRatioScore(scale, traj, rigid)
+            : toMinMaxScore(scale, traj, rigid)
+    );
 
     const updateSubtitle = () => {
         if (!activeOrg) return;
-        subtitle.textContent = `${activeOrg} | Normalized physical consistency (higher is better), with GT as gray baseline.`;
+        subtitle.textContent = `${activeOrg} | ${radarMode === 'gtratio' ? 'Relative-to-GT' : 'Min-Max'} score, higher is better, with GT as gray baseline.`;
         if (radarNote) {
-            radarNote.textContent = 'Radar uses normalized physical consistency scores (higher is better); GT is shown as the gray baseline.';
+            radarNote.textContent = radarMode === 'gtratio'
+                ? 'Relative-to-GT mode: score = GT / value (clamped to [0,1]); higher means closer to GT.'
+                : 'Min-Max mode: score = (max - value) / (max - min), higher means better physical consistency.';
         }
+    };
+
+    const updateModeButtons = () => {
+        if (modeMinMaxBtn) modeMinMaxBtn.classList.toggle('is-active', radarMode === 'minmax');
+        if (modeGtRatioBtn) modeGtRatioBtn.classList.toggle('is-active', radarMode === 'gtratio');
     };
 
     const renderRadar = () => {
         if (!activeSelection) return;
-        const gtValues = toScoreValues(gtScaleRaw, gtTrajRaw, gtRigidRaw);
-        const modelValues = toScoreValues(activeSelection.scale, activeSelection.traj, activeSelection.rigid);
+        const gtValues = toModeScore(gtScaleRaw, gtTrajRaw, gtRigidRaw);
+        const modelValues = toModeScore(activeSelection.scale, activeSelection.traj, activeSelection.rigid);
         drawRadarChart(canvas, modelValues, gtValues);
     };
 
@@ -359,6 +390,7 @@ function setupModelRadar() {
             metricTraj.textContent = traj.toFixed(4);
             metricRigid.textContent = rigid.toFixed(4);
             metricPdi.textContent = pdi.toFixed(4);
+            updateModeButtons();
             renderRadar();
 
             modal.classList.add('is-open');
@@ -366,6 +398,24 @@ function setupModelRadar() {
             modal.setAttribute('aria-hidden', 'false');
         });
     });
+
+    if (modeMinMaxBtn) {
+        modeMinMaxBtn.addEventListener('click', () => {
+            radarMode = 'minmax';
+            updateModeButtons();
+            updateSubtitle();
+            renderRadar();
+        });
+    }
+
+    if (modeGtRatioBtn) {
+        modeGtRatioBtn.addEventListener('click', () => {
+            radarMode = 'gtratio';
+            updateModeButtons();
+            updateSubtitle();
+            renderRadar();
+        });
+    }
 
     closeBtn.addEventListener('click', () => {
         modal.classList.remove('is-open');
