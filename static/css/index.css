@@ -118,7 +118,7 @@ body {
     font-family: 'Inter', sans-serif !important;
     font-weight: 800 !important;
     color: var(--text-primary) !important;
-    font-size: 3.2rem !important;
+    font-size: 2.6rem !important;
     margin-bottom: 2rem !important;
     line-height: 1.1 !important;
 }
@@ -547,6 +547,13 @@ body {
   color: var(--text-secondary);
 }
 
+.radar-capability-note {
+  margin: -0.35rem 0 0.8rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
 .radar-mode-toggle {
   display: inline-flex;
   gap: 0.35rem;
@@ -605,6 +612,41 @@ body {
   font-size: 0.82rem;
   color: var(--text-secondary);
   margin-top: 0.35rem;
+}
+
+.example-videos-section {
+  background: var(--background-secondary);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.example-video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.example-video-card {
+  background: var(--background-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 0.6rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.example-video-card video {
+  width: 100%;
+  border-radius: 10px;
+  display: block;
+}
+
+.example-video-caption {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  text-align: center;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.9rem;
 }
 
 /* Pagination and Misc Improvements */
@@ -971,6 +1013,10 @@ code {
   .content.has-text-justified {
     font-size: 1rem;
   }
+
+  .example-video-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -1010,6 +1056,10 @@ code {
   .button {
     width: 100%;
     justify-content: center;
+  }
+
+  .example-video-grid {
+    grid-template-columns: 1fr;
   }
 }
 
