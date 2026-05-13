@@ -736,6 +736,11 @@ main > .hero:first-child + .hero .hero-body {
   margin-bottom: 1.5rem;
 }
 
+.abstract-section .content.has-text-justified {
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
 /* Footer Improvements */
 .footer {
   background: var(--background-secondary);
