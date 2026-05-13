@@ -118,9 +118,9 @@ body {
     font-family: 'Inter', sans-serif !important;
     font-weight: 800 !important;
     color: var(--text-primary) !important;
-    font-size: 2.6rem !important;
-    margin-bottom: 2rem !important;
-    line-height: 1.1 !important;
+    font-size: 1.9rem !important;
+    margin-bottom: 1.4rem !important;
+    line-height: 1.15 !important;
 }
 
 .publication-banner {
@@ -622,7 +622,7 @@ body {
 
 .example-video-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
 }
 
