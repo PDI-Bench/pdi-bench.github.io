@@ -118,9 +118,9 @@ body {
     font-family: 'Inter', sans-serif !important;
     font-weight: 800 !important;
     color: var(--text-primary) !important;
-    font-size: 1.9rem !important;
-    margin-bottom: 1.4rem !important;
-    line-height: 1.15 !important;
+    font-size: 1.0rem !important;
+    margin-bottom: 0.4rem !important;
+    line-height: 0.4 !important;
 }
 
 .publication-banner {
@@ -621,8 +621,8 @@ body {
 }
 
 .example-video-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   gap: 1rem;
 }
 
@@ -1015,7 +1015,7 @@ code {
   }
 
   .example-video-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 }
 
@@ -1059,7 +1059,7 @@ code {
   }
 
   .example-video-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 }
 
