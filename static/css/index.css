@@ -321,6 +321,13 @@ main > .hero:first-child + .hero .hero-body {
   font-weight: 500;
 }
 
+.overview-carousel .item img {
+  width: 90%;
+  max-width: 1120px;
+  margin: 0 auto;
+  display: block;
+}
+
 .pipeline-caption {
   font-size: 1rem !important;
   color: var(--text-secondary);
