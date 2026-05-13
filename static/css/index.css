@@ -118,6 +118,7 @@ body {
     font-family: 'Inter', sans-serif !important;
     font-weight: 800 !important;
     color: var(--text-primary) !important;
+    font-size: 3.2rem !important;
     margin-bottom: 2rem !important;
     line-height: 1.1 !important;
 }
@@ -148,6 +149,7 @@ body {
 .publication-authors {
     font-family: 'Inter', sans-serif !important;
     font-weight: 500;
+    font-size: 1.05rem !important;
     margin-bottom: 1.5rem;
 }
 
