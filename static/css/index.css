@@ -79,7 +79,7 @@ body {
 }
 
 .link-block a {
-    margin: 8px 4px;
+    margin: 4px 3px;
 }
 
 .dnerf {
@@ -100,7 +100,16 @@ body {
 }
 
 .hero-body {
-  padding: 4rem 1.5rem;
+  padding: 3rem 1.5rem;
+}
+
+main > .hero:first-child .hero-body {
+  padding-top: 2.5rem;
+  padding-bottom: 1.25rem;
+}
+
+main > .hero:first-child + .hero .hero-body {
+  padding-top: 1.5rem;
 }
 
 .teaser .hero-body {
@@ -150,12 +159,27 @@ body {
     font-family: 'Inter', sans-serif !important;
     font-weight: 500;
     font-size: 1.05rem !important;
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.15rem;
 }
 
 .publication-authors + .publication-authors {
-  margin-top: -0.45rem;
-  margin-bottom: 0.75rem;
+  margin-top: -0.55rem;
+  margin-bottom: 0.55rem;
+}
+
+.publication-links .button {
+  font-size: 0.9rem !important;
+  padding: 0.45rem 0.9rem !important;
+  height: auto !important;
+}
+
+.publication-links .icon {
+  width: 0.95rem !important;
+  height: 0.95rem !important;
+}
+
+.publication-links .icon i {
+  font-size: 0.9rem !important;
 }
 
 .publication-venue {
