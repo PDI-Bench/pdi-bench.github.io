@@ -774,7 +774,7 @@ main > .hero:first-child + .hero .hero-body {
 
 .abstract-section {
   padding-top: 1.25rem !important;
-  padding-bottom: 1.25rem !important;
+  padding-bottom: 0.6rem !important;
 }
 
 .abstract-section .container.is-max-desktop {
@@ -783,6 +783,10 @@ main > .hero:first-child + .hero .hero-body {
 
 .abstract-section .column.is-four-fifths {
   width: 93%;
+}
+
+.abstract-section .content.has-text-justified p {
+  margin-bottom: 0.5rem;
 }
 
 /* Footer Improvements */
