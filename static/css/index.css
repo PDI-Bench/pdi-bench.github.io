@@ -328,6 +328,15 @@ main > .hero:first-child + .hero .hero-body {
   display: block;
 }
 
+.overview-carousel {
+  padding: 0.35rem 0;
+}
+
+.overview-carousel .item {
+  margin: 0.45rem;
+  padding: 0.85rem;
+}
+
 #results-carousel-pipeline .item img,
 #results-carousel-metrics .item img {
   width: 99%;
@@ -773,7 +782,7 @@ main > .hero:first-child + .hero .hero-body {
 }
 
 .abstract-section .column.is-four-fifths {
-  width: 95%;
+  width: 93%;
 }
 
 /* Footer Improvements */
