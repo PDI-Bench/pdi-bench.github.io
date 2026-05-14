@@ -79,7 +79,7 @@ body {
 }
 
 .link-block a {
-    margin: 2px 3px;
+    margin: 2px 2px;
 }
 
 .dnerf {
@@ -168,8 +168,8 @@ main > .hero:first-child + .hero .hero-body {
 }
 
 .publication-links {
-  margin-top: 0.25rem;
-  margin-bottom: 0.25rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
 }
 
 .publication-links .button {
