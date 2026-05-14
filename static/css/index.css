@@ -759,7 +759,7 @@ main > .hero:first-child + .hero .hero-body {
 }
 
 .abstract-section .content.has-text-justified {
-  font-size: 0.80rem;
+  font-size: 0.84rem;
   line-height: 1.5;
 }
 
@@ -769,7 +769,7 @@ main > .hero:first-child + .hero .hero-body {
 }
 
 .abstract-section .container.is-max-desktop {
-  max-width: 1140px !important;
+  max-width: 1080px !important;
 }
 
 .abstract-section .column.is-four-fifths {
