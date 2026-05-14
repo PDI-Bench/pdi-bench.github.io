@@ -763,6 +763,14 @@ main > .hero:first-child + .hero .hero-body {
   line-height: 1.58;
 }
 
+.abstract-section .container.is-max-desktop {
+  max-width: 1080px !important;
+}
+
+.abstract-section .column.is-four-fifths {
+  width: 92%;
+}
+
 /* Footer Improvements */
 .footer {
   background: var(--background-secondary);
