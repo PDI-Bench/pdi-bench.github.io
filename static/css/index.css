@@ -79,7 +79,7 @@ body {
 }
 
 .link-block a {
-    margin: 4px 3px;
+    margin: 2px 3px;
 }
 
 .dnerf {
@@ -167,19 +167,24 @@ main > .hero:first-child + .hero .hero-body {
   margin-bottom: 0.55rem;
 }
 
+.publication-links {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
 .publication-links .button {
-  font-size: 0.9rem !important;
-  padding: 0.45rem 0.9rem !important;
+  font-size: 0.82rem !important;
+  padding: 0.3rem 0.72rem !important;
   height: auto !important;
 }
 
 .publication-links .icon {
-  width: 0.95rem !important;
-  height: 0.95rem !important;
+  width: 0.82rem !important;
+  height: 0.82rem !important;
 }
 
 .publication-links .icon i {
-  font-size: 0.9rem !important;
+  font-size: 0.82rem !important;
 }
 
 .publication-venue {
