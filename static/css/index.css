@@ -177,12 +177,12 @@ main > .hero:first-child + .hero .hero-body {
 
 .publication-link-column {
   padding-top: 0.1rem !important;
-  padding-bottom: 0 !important;
+  padding-bottom: 0.2rem !important;
 }
 
 .publication-links .button {
   font-size: 0.82rem !important;
-  padding: 0.15rem 0.72rem !important;
+  padding: 0.17rem 0.72rem !important;
   height: auto !important;
   line-height: 1.2 !important;
 }
