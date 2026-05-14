@@ -170,6 +170,9 @@ main > .hero:first-child + .hero .hero-body {
 .publication-links {
   margin-top: 0.2rem;
   margin-bottom: 0.2rem;
+  display: flex;
+  justify-content: center;
+  gap: 2px;
 }
 
 .publication-links .button {
