@@ -337,6 +337,11 @@ main > .hero:first-child + .hero .hero-body {
   padding: 0.85rem;
 }
 
+.abstract-section + .hero.is-small .hero-body {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
 #results-carousel-pipeline .item img,
 #results-carousel-metrics .item img {
   width: 99%;
@@ -786,7 +791,8 @@ main > .hero:first-child + .hero .hero-body {
 }
 
 .abstract-section .content.has-text-justified p {
-  margin-bottom: 0.5rem;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 /* Footer Improvements */
